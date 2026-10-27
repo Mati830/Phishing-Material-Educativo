@@ -160,6 +160,12 @@
       color: var(--text-muted);
     }
 
+    .toolbar-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
     .toolbar-pill {
       border: 1px solid var(--border);
       background: var(--panel-soft);
@@ -167,6 +173,22 @@
       padding: 7px 12px;
       font-weight: 600;
       color: var(--text);
+    }
+
+    .repo-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      background: linear-gradient(180deg, #0f58d5 0%, #0a47a8 100%);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      padding: 8px 14px;
+      font-size: 12px;
+      font-weight: 700;
+      box-shadow: 0 8px 16px rgba(20, 87, 210, 0.18);
+      cursor: pointer;
     }
 
     .mail-card {
@@ -511,7 +533,8 @@
               <span class="toolbar-pill">Inbox</span>
               <span>2 mensajes nuevos</span>
             </div>
-            <div class="toolbar-left">
+            <div class="toolbar-right">
+              <a class="repo-button" href="./phishing_educativo.html" target="_blank" rel="noreferrer">↗ Abrir demo</a>
               <span>🔍</span>
             </div>
           </div>

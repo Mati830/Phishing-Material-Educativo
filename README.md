@@ -4,27 +4,15 @@ Una demo educativa para mostrar cómo se ve un correo de phishing y cómo recono
 
 ## Ver la demo
 
-[![Abrir demo](https://img.shields.io/badge/Abrir-Demo-0f4cbd?style=for-the-badge)](./phishing_educativo.html)
+Para abrir directamente el correo educativo en el navegador, hacé clic aquí:
 
-[![Ver repositorio](https://img.shields.io/badge/Ver-Repositorio-blue?style=for-the-badge)](https://github.com/Mati830/Phishing-Material-Educativo)
+[**Abrir demo en el navegador**](./phishing_educativo.html)
 
-La forma más fácil es abrir el archivo `phishing_educativo.html` en tu navegador.
+Si querés verlo online, una vez que GitHub Pages esté activado, la URL será:
 
-Si quieres verlo online en GitHub Pages, primero tenés que activarlo en GitHub:
+https://Mati830.github.io/Phishing-Material-Educativo/phishing_educativo.html
 
-1. Entrá al repositorio en GitHub
-2. Hacé clic en Settings
-3. Buscá la sección Pages
-4. Elegí "Deploy from a branch"
-5. Seleccioná la rama `main`
-6. En folder, elegí `/root`
-7. Guardá
-
-Cuando Pages quede habilitado, la URL será algo así:
-
-https://Mati830.github.io/Phishing-Material-Educativo/
-
-> Si esa URL devuelve 404, significa que GitHub Pages todavía no está activado para este repositorio.
+> Esto abre la vista real del mail, no el repositorio.
 
 ## Qué hace esta demo
 
@@ -56,12 +44,6 @@ Si una persona no es programadora, lo más simple es:
 ## Importante
 
 Esto es solo para fines educativos y de concientización sobre seguridad digital.
-
-## Botones rápidos
-
-[![Abrir demo local](https://img.shields.io/badge/Abrir-Demo%20Local-16a34a?style=for-the-badge)](./phishing_educativo.html)
-
-[![Ver repositorio](https://img.shields.io/badge/Ver-Repositorio-2563eb?style=for-the-badge)](https://github.com/Mati830/Phishing-Material-Educativo)
 
 ## Licencia
 
