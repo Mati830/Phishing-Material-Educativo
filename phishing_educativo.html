@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Phishing — Material Educativo</title>
+  <style>
+    :root {
+      --page-bg: #edf2f7;
+      --panel: #ffffff;
+      --panel-soft: #f8fafc;
+      --sidebar: #f3f6fb;
+      --border: #e2e8f0;
+      --text: #1f2937;
+      --text-muted: #667085;
+      --primary: #0f4cbd;
+      --primary-dark: #0a3d99;
+      --danger: #bf2e2e;
+      --danger-soft: #fbe9e9;
+      --warning-bg: #fff7df;
+      --warning-border: #f4c95d;
+      --shadow: 0 18px 45px rgba(15, 23, 42, 0.08);
+      --radius: 18px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      min-height: 100%;
+      font-family: "Segoe UI", Arial, sans-serif;
+      background: var(--page-bg);
+      color: var(--text);
+    }
+
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 36px 18px;
+    }
+
+    .container {
+      width: min(1100px, 100%);
+    }
+
+    .edu-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #fff8dd;
+      border: 1px solid #f7d97b;
+      color: #7a5d00;
+      border-radius: 999px;
+      padding: 7px 14px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      margin-bottom: 16px;
+    }
+
+    .intro {
+      max-width: 780px;
+      margin: 0 0 20px;
+      color: var(--text-muted);
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    .mail-shell {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .mail-layout {
+      display: grid;
+      grid-template-columns: 220px minmax(0, 1fr);
+      min-height: 640px;
+    }
+
+    .sidebar {
+      background: var(--sidebar);
+      border-right: 1px solid var(--border);
+      padding: 18px 14px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 10px 18px;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .brand-mark {
+      width: 30px;
+      height: 30px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #1d4ed8 0%, #0f172a 100%);
+      color: white;
+      display: grid;
+      place-items: center;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .nav {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border-radius: 10px;
+      padding: 10px 12px;
+      color: var(--text-muted);
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .nav-item.active {
+      background: #eaf0ff;
+      color: var(--primary-dark);
+    }
+
+    .nav-icon {
+      width: 18px;
+      text-align: center;
+      opacity: 0.8;
+    }
+
+    .mail-panel {
+      background: #fbfcff;
+      padding: 0;
+    }
+
+    .mail-toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 22px;
+      border-bottom: 1px solid var(--border);
+      background: #ffffff;
+    }
+
+    .toolbar-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .toolbar-pill {
+      border: 1px solid var(--border);
+      background: var(--panel-soft);
+      border-radius: 999px;
+      padding: 7px 12px;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .mail-card {
+      padding: 26px 28px 18px;
+      background: white;
+      border-bottom: 1px solid var(--border);
+      cursor: pointer;
+      transition: box-shadow 0.18s ease;
+    }
+
+    .mail-card:hover {
+      box-shadow: inset 0 0 0 1px rgba(15, 76, 189, 0.08);
+    }
+
+    .mail-meta {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: center;
+      margin-bottom: 14px;
+    }
+
+    .mail-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      border-radius: 999px;
+      padding: 6px 10px;
+      font-size: 11px;
+      font-weight: 700;
+      background: var(--danger-soft);
+      color: var(--danger);
+      border: 1px solid rgba(191, 46, 46, 0.16);
+    }
+
+    .mail-time {
+      font-size: 12px;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    .field-row {
+      display: grid;
+      grid-template-columns: 62px minmax(0, 1fr);
+      gap: 12px;
+      font-size: 13px;
+      line-height: 1.6;
+      margin-bottom: 8px;
+    }
+
+    .field-label {
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    .field-value {
+      color: var(--text);
+      overflow-wrap: anywhere;
+    }
+
+    .suspicious {
+      color: var(--danger);
+      font-weight: 700;
+      text-decoration: underline dashed;
+      text-underline-offset: 3px;
+    }
+
+    .subject {
+      margin-top: 12px;
+      padding-top: 8px;
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .mail-body {
+      padding: 18px 28px 20px;
+      background: #fff;
+      line-height: 1.8;
+      color: var(--text);
+      font-size: 14px;
+    }
+
+    .mail-body p {
+      margin: 0 0 12px;
+    }
+
+    .brand-logo {
+      text-align: center;
+      margin: 12px 0 18px;
+    }
+
+    .brand-logo-box {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 26px;
+      border-radius: 8px;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      background: linear-gradient(135deg, #082c78 0%, #0d47b1 100%);
+      color: white;
+      font-size: 17px;
+      box-shadow: inset 0 -2px 0 rgba(0,0,0,0.12);
+    }
+
+    .alert-box {
+      background: var(--warning-bg);
+      border-left: 4px solid #f2b705;
+      border-radius: 10px;
+      padding: 14px 16px;
+      margin: 18px 0;
+      color: #3f3f46;
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    .cta-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 13px 26px;
+      margin: 14px auto;
+      background: linear-gradient(180deg, #0d58d9 0%, #0b47b0 100%);
+      color: white;
+      border-radius: 8px;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+      border: none;
+      pointer-events: none;
+      box-shadow: 0 10px 18px rgba(18, 86, 206, 0.18);
+    }
+
+    .cta-wrap {
+      display: flex;
+      justify-content: center;
+      margin: 12px 0 8px;
+    }
+
+    .mail-footer {
+      margin-top: 16px;
+      padding-top: 10px;
+      border-top: 1px solid var(--border);
+      color: var(--text-muted);
+      font-size: 12px;
+      line-height: 1.6;
+    }
+
+    .click-hint {
+      text-align: center;
+      margin-top: 12px;
+      color: var(--text-muted);
+      font-size: 12px;
+      font-weight: 600;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.36; }
+    }
+
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.7);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 999;
+      padding: 20px;
+    }
+
+    .modal-overlay.open { display: flex; }
+
+    .modal-box {
+      width: min(500px, 100%);
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      box-shadow: 0 25px 55px rgba(15, 23, 42, 0.18);
+      padding: 26px 24px 20px;
+      animation: rise 0.22s ease;
+    }
+
+    @keyframes rise {
+      from { opacity: 0; transform: translateY(12px) scale(0.97); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .step-indicator {
+      display: flex;
+      gap: 7px;
+      margin-bottom: 18px;
+    }
+
+    .step-dot {
+      height: 4px;
+      border-radius: 999px;
+      background: #e5e7eb;
+      flex: 1;
+      transition: background 0.2s ease;
+    }
+
+    .step-dot.active { background: var(--danger); }
+    .step-dot.done { background: rgba(191, 46, 46, 0.45); }
+
+    .modal-num {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: var(--danger);
+      color: white;
+      display: grid;
+      place-items: center;
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .modal-title {
+      font-size: 17px;
+      font-weight: 700;
+      margin-bottom: 12px;
+      color: var(--text);
+    }
+
+    .modal-body {
+      padding-top: 12px;
+      border-top: 1px solid var(--border);
+      color: var(--text-muted);
+      font-size: 13px;
+      line-height: 1.8;
+      white-space: pre-line;
+    }
+
+    .modal-actions {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .modal-progress {
+      font-size: 12px;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    .btn-skip {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      font-size: 12px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    .btn-next {
+      background: var(--danger);
+      border: none;
+      color: white;
+      padding: 9px 18px;
+      border-radius: 10px;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .btn-close {
+      display: inline-block;
+      margin-top: 18px;
+      padding: 10px 24px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: white;
+      color: var(--text);
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .modal-final {
+      text-align: center;
+    }
+
+    .check-icon {
+      font-size: 42px;
+      margin-bottom: 12px;
+    }
+
+    .modal-final h3 {
+      margin: 0 0 10px;
+      font-size: 18px;
+    }
+
+    .modal-final p {
+      margin: 0;
+      color: var(--text-muted);
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    @media (max-width: 760px) {
+      .mail-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .sidebar {
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .mail-card, .mail-body {
+        padding-left: 18px;
+        padding-right: 18px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="mail-shell">
+      <div class="mail-layout">
+        <aside class="sidebar">
+          <div class="brand">
+            <div class="brand-mark">B</div>
+            <span>Banco del Sur</span>
+          </div>
+
+          <div class="nav">
+            <div class="nav-item active"><span class="nav-icon">✉</span> Bandeja</div>
+            <div class="nav-item"><span class="nav-icon">⏱</span> Importantes</div>
+            <div class="nav-item"><span class="nav-icon">★</span> Destacados</div>
+            <div class="nav-item"><span class="nav-icon">🗂</span> Archivados</div>
+          </div>
+        </aside>
+
+        <main class="mail-panel">
+          <div class="mail-toolbar">
+            <div class="toolbar-left">
+              <span class="toolbar-pill">Inbox</span>
+              <span>2 mensajes nuevos</span>
+            </div>
+            <div class="toolbar-left">
+              <span>🔍</span>
+            </div>
+          </div>
+
+          <div class="mail-card" onclick="showFakeHack()" title="Clic para ver señales de alerta">
+            <div class="mail-meta">
+              <div class="mail-badge">⚠ Sospechoso</div>
+              <div class="mail-time">Hace 2 min</div>
+            </div>
+
+            <div class="field-row">
+              <div class="field-label">De:</div>
+              <div class="field-value">
+                Banco del Sur &lt;<span class="suspicious">atencion@seguridad-bancodelsur.com.ar-verify.xyz</span>&gt;
+              </div>
+            </div>
+
+            <div class="field-row">
+              <div class="field-label">Para:</div>
+              <div class="field-value">ejemplo@victima.com</div>
+            </div>
+
+            <div class="field-row">
+              <div class="field-label">Asunto:</div>
+              <div class="field-value suspicious">🔴 Acción requerida: su cuenta fue bloqueada</div>
+            </div>
+
+            <div class="subject">Verificación urgente de identidad</div>
+          </div>
+
+          <div class="mail-body" onclick="showFakeHack()" title="Clic para ver señales de alerta">
+            <div class="brand-logo">
+              <div class="brand-logo-box">🏦 Banco del Sur</div>
+            </div>
+
+            <p>Estimado cliente,</p>
+            <p>
+              Hemos detectado un intento de acceso no autorizado a su cuenta bancaria. Por motivos de seguridad,
+              <strong>hemos bloqueado temporalmente</strong> su acceso hasta confirmar su identidad.
+            </p>
+
+            <div class="alert-box">
+              ⚠️ <strong>Si no verifica su identidad dentro de las próximas 24 horas</strong>, su cuenta quedará
+              <strong>bloqueada permanentemente</strong> y se podrían restringir movimientos y pagos.
+            </div>
+
+            <p>Para continuar, confirme su identidad haciendo clic en el botón de abajo:</p>
+
+            <div class="cta-wrap">
+              <button class="cta-button" type="button">✔ Verificar mi identidad</button>
+            </div>
+
+            <p style="font-size:12px; color: var(--text-muted);">
+              Si el botón no funciona, copie este enlace en el navegador:<br>
+              <span class="suspicious" style="font-size:11px; word-break:break-all; cursor:pointer; display:inline-block; margin-top:4px;" onclick="showFakeHack(); event.stopPropagation();" role="button" tabindex="0" onkeydown="if(event.key === 'Enter' || event.key === ' ') { event.preventDefault(); showFakeHack(); }">
+                https://bancodelsur-validacion-segura.xyz/confirmar/identidad?ref=83742
+              </span>
+            </p>
+
+            <div class="mail-footer">
+              © 2026 Banco del Sur S.A. · Av. Corrientes 1234, Buenos Aires<br>
+              Este mensaje fue enviado a ejemplo@victima.com
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+
+    <div class="click-hint">👆 Hacé clic en el correo para iniciar el recorrido</div>
+  </div>
+
+  <div class="modal-overlay" id="modal">
+    <div class="modal-box" id="modal-box">
+      <div class="step-indicator" id="step-indicator"></div>
+      <div id="modal-content"></div>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="fake-hack-modal" style="background: rgba(11, 16, 24, 0.8);">
+    <div class="modal-box" id="fake-hack-box" style="max-width: 420px; background: #121a2d; border-color: rgba(255,255,255,0.08); color: white;">
+      <div style="text-align:center; margin-bottom: 16px; font-size: 42px;">🚨</div>
+      <h3 style="margin:0 0 10px; text-align:center; font-size: 28px; color:#ff6b6b;">Cuenta comprometida</h3>
+      <p style="margin:0 0 12px; text-align:center; color:#dfe7ff; line-height:1.7; font-size:14px;">
+        Esto puede ocurrir cuando una persona hace clic en un enlace falso o comparte información personal sin verificar el origen del mensaje.
+      </p>
+      <p style="margin:0 0 18px; text-align:center; color:#c7d2fe; line-height:1.7; font-size:13px;">
+        En este caso, la cuenta no está necesariamente comprometida: es una simulación para mostrar cómo los ataques de phishing usan miedo, urgencia y presiones para hacer que actúes sin pensar.
+      </p>
+      <div style="text-align:center;">
+        <button class="btn-next" onclick="closeFakeHack(); startTour();" style="background:#ef4444; padding: 11px 22px; border-radius: 10px;">Entender por qué ocurrió</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const steps = [
+      {
+        title: "1️⃣ El remitente es sospechoso",
+        body: `El nombre visible dice "Banco del Sur", pero la dirección real es:
+
+atencion@seguridad-bancodelsur.com.ar-verify.xyz
+
+El atacante usa el nombre del banco antes del @ para dar una apariencia legítima. El dominio real siempre está después del símbolo @.
+
+✅ Cómo protegerte: revisá siempre la dirección completa. Los bancos reales usan dominios propios y claros, no una dirección con nombres raros, largas o mezcladas.`
+      },
+      {
+        title: "2️⃣ La urgencia es artificial",
+        body: `El correo usa frases como "acción requerida", "bloqueada" y alertas visibles para crear sensación de pánico.
+
+Esto se llama presión emocional. La idea es que no leas con calma y hagas clic enseguida.
+
+✅ Cómo protegerte: si un email te genera miedo o urgencia inmediata, pausaló. Revisá si es real y verificá por otro canal antes de responder.`
+      },
+      {
+        title: "3️⃣ Te empujan a actuar sin pensar",
+        body: `La frase "si no verifica en 24 horas" genera presión y obliga a tomar una decisión rápida.
+
+Los atacantes quieren que actúes por emoción, no por lógica.
+
+✅ Cómo protegerte: no respondas ni hagas clic en links de mensajes que exigen acción inmediata. En lugar de eso, verificá en la app o web oficial.`
+      },
+      {
+        title: "4️⃣ El diseño imita una marca real",
+        body: `El logo, los colores y el estilo visual están copiados para parecer un banco auténtico.
+
+Esto se conoce como suplantación de marca: usan la identidad visual de una empresa para ganar confianza.
+
+✅ Cómo protegerte: un diseño profesional no significa que sea legítimo. El remitente y el enlace deben poder verificarse.`
+      },
+      {
+        title: "5️⃣ El enlace te dirige a un sitio falso",
+        body: `El botón y el enlace llevan a una URL sospechosa:
+
+https://bancodelsur-validacion-segura.xyz/confirmar/identidad?ref=83742
+
+Ese dominio no pertenece al banco real. Los atacantes usan palabras conocidas para que parezca oficial.
+
+✅ Cómo protegerte: nunca hagas clic en enlaces de mensajes de seguridad. Escribí la dirección del banco manualmente en el navegador o usá la app oficial.`
+      }
+    ];
+
+    let current = 0;
+
+    function startTour() {
+      current = 0;
+      renderStep();
+      document.getElementById('modal').classList.add('open');
+    }
+
+    function showFakeHack() {
+      document.getElementById('fake-hack-modal').classList.add('open');
+    }
+
+    function closeFakeHack() {
+      document.getElementById('fake-hack-modal').classList.remove('open');
+    }
+
+    function renderStep() {
+      const total = steps.length;
+      const s = steps[current];
+      let dots = '';
+
+      for (let i = 0; i < total; i++) {
+        const cls = i < current ? 'done' : (i === current ? 'active' : '');
+        dots += `<div class="step-dot ${cls}"></div>`;
+      }
+
+      document.getElementById('step-indicator').innerHTML = dots;
+
+      const isLast = current === total - 1;
+      document.getElementById('modal-content').innerHTML = `
+        <div class="modal-num">${current + 1}</div>
+        <div class="modal-title">${s.title}</div>
+        <div class="modal-body">${s.body}</div>
+        <div class="modal-actions">
+          <span class="modal-progress">${current + 1} de ${total}</span>
+          <div style="display:flex; gap:10px; align-items:center;">
+            <button class="btn-skip" onclick="closeTour()">Saltar</button>
+            <button class="btn-next" onclick="nextStep()">${isLast ? 'Ver resumen' : 'Siguiente →'}</button>
+          </div>
+        </div>
+      `;
+    }
+
+    function nextStep() {
+      if (current < steps.length - 1) {
+        current++;
+        const box = document.getElementById('modal-box');
+        box.style.animation = 'none';
+        void box.offsetWidth;
+        box.style.animation = 'rise 0.22s ease';
+        renderStep();
+      } else {
+        showFinal();
+      }
+    }
+
+    function showFinal() {
+      document.getElementById('step-indicator').innerHTML = '';
+      document.getElementById('modal-content').innerHTML = `
+        <div class="modal-final">
+          <div class="check-icon">✅</div>
+          <h3>¡Recorrido completado!</h3>
+          <p>
+            Ya identificaste las 5 señales más comunes de phishing:<br><br>
+            <strong>1.</strong> Remitente sospechoso<br>
+            <strong>2.</strong> Urgencia artificial<br>
+            <strong>3.</strong> Presión emocional para actuar sin pensar<br>
+            <strong>4.</strong> Diseño visual que imita una marca real<br>
+            <strong>5.</strong> Link falso disfrazado de oficial<br><br>
+            Regla simple: si algo te pide verificar o hacer clic de inmediato, revisá por otra vía antes de actuar.
+          </p>
+          <button class="btn-close" onclick="closeTour()">Cerrar</button>
+        </div>
+      `;
+    }
+
+    function closeTour() {
+      document.getElementById('modal').classList.remove('open');
+    }
+
+    document.getElementById('modal').addEventListener('click', function (e) {
+      if (e.target === this) closeTour();
+    });
+
+    document.getElementById('fake-hack-modal').addEventListener('click', function (e) {
+      if (e.target === this) closeFakeHack();
+    });
+  </script>
+</body>
+</html>
